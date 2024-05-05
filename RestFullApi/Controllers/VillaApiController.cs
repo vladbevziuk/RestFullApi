@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using RestFullApi.Data;
-using RestFullApi.Logging;
 using RestFullApi.Models;
 using RestFullApi.Models.dto;
 
@@ -12,17 +11,15 @@ namespace RestFullApi.Controllers
     [ApiController]
     public class VillaApiController : ControllerBase
     {
-        private readonly ILogging _logger;
-
-        public VillaApiController(ILogging logger)
+        public VillaApiController()
         {
-            _logger  = logger;
+            
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<VillaDto>> GetVillas()
         {
-            _logger.Log("Getting all villas","");
+            
             return Ok(VillaDate.villaList);
         }
 
@@ -37,7 +34,7 @@ namespace RestFullApi.Controllers
         {
             if (id == 0)
             {
-                _logger.Log("error with id in:" + id, "error");
+                
                 return BadRequest();
             }
             var villa = VillaDate.villaList.FirstOrDefault(u => u.Id == id); // cтворив змінну яка показує по id
